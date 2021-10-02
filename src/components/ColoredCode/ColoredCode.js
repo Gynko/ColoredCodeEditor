@@ -1,11 +1,13 @@
+import InputConsole from "../InputConsole/InputConsole";
+import InputEditor from "../InputEditor/InputEditor";
 import "./ColoredCode.styles.css";
 
 function ColoredCode() {
   return (
-    <>
-      <input className="input-codeeditor" placeholder="code" />
-      <div>Console</div>
-    </>
+    <div className="layout-editor-console">
+      <InputEditor />
+      <InputConsole />
+    </div>
   );
 }
 
