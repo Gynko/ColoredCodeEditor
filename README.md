@@ -15,14 +15,15 @@ The colored code component is here to enhance the presentation of code on our we
 * Optional reset to the default placeholder code.
 
 ### Components structure:
-.
-├── src  
-    ├── ColoredCode
-    │   ├───ColoredCode.js
-    │   └───ColoredCode.styles.js
-    ├── InputConsole
-    │   ├───InputConsole.js
-    │   └───InputConsole.styles.js
-    └── InputEditor
-        ├───InputEditor.js
-        └───InputEditor.styles.js
+    .
+    ├── src  
+        ├── ColoredCode
+        │   ├───ColoredCode.js
+        │   └───ColoredCode.styles.js
+        ├── InputConsole
+        │   ├───InputConsole.js
+        │   └───InputConsole.styles.js
+        └── InputEditor
+            ├───InputEditor.js
+            └───InputEditor.styles.js
+
