@@ -1,3 +1,4 @@
-Colored code editor
+#Colored code editor
+##A react component
 
-A component for React
+![Colored Code Editor](https://imgur.com/StINA2X)
