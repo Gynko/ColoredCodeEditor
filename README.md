@@ -13,3 +13,16 @@ The colored code component is here to enhance the presentation of code on our we
 * You can change the theme. Vanilla Css for easier sharing?
 * Live coloring: we can type in the editor box and keywords are recognised and colored on the go.
 * Optional reset to the default placeholder code.
+
+### Components structure:
+.
+├── src  
+    ├── ColoredCode
+    │   ├───ColoredCode.js
+    │   └───ColoredCode.styles.js
+    ├── InputConsole
+    │   ├───InputConsole.js
+    │   └───InputConsole.styles.js
+    └── InputEditor
+        ├───InputEditor.js
+        └───InputEditor.styles.js
