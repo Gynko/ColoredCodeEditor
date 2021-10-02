@@ -21,6 +21,8 @@ function InputEditor() {
   var text =
     "Oh a Primitive Type is in my text. How Null ! I don't want to be Undefined by this feature.. Primitive Type ";
 
+  var textConverted = "";
+
   function analyzeText(text) {
     var array = [];
     for (let i = 0; i < listElements.length; i++) {
@@ -32,8 +34,8 @@ function InputEditor() {
       }
     }
     array = array.flat();
-    console.log(array);
-    return `I found these words: ${array.flat()}`;
+    textConverted = convertTextToHtml(text, array[0]);
+    return `I found these ${array}`;
   }
 
   function convertTextToHtml(text, element) {
@@ -41,6 +43,8 @@ function InputEditor() {
     //I need then to remove the string of the match and replace it with some styled html.
     //To remove, i need start of the input and its end. If index start is 9 and match length is 16 characters, index end is 25.
     //Then i add appropriate html at index start.
+    console.log("element info", element.index, element[0], element[0].length);
+    console.log("text infos", text[element.index], text[element.index + 1]);
     var outputHtml = "nothing yet";
     return outputHtml;
   }
@@ -50,7 +54,7 @@ function InputEditor() {
       <p>{text}</p>
       <input className="input-codeeditor" placeholder="code" type="text" />
       <p>{analyzeText(text)}</p>
-      <p>{convertTextToHtml()}</p>
+      <p>{textConverted}</p>
     </div>
   );
 }
