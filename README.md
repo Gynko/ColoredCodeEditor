@@ -1,5 +1,5 @@
 # Colored code
-## A react component
+## A vanilla react component
 
 ### Purpose:
 The colored code component is here to enhance the presentation of code on our websites.
