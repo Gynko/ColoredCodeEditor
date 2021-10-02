@@ -1,5 +1,7 @@
+import './ColoredCode.styles.css';
+
 function ColoredCode() {
-    return <div>Colored Code</div>
+    return <><input className="input-codeeditor" placeholder="code"/></>
 }
 
 export default ColoredCode;
