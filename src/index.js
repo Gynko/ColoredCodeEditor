@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ColoredCode from './components/ColoredCode/ColoredCode';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ColoredCode />
   </React.StrictMode>,
   document.getElementById('root')
 );
