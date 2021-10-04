@@ -4,12 +4,14 @@
 ![Colored Code Editor](https://i.imgur.com/StINA2X.png)
 
 ### Features:
-* Colored code is a react component that colors the text that we input, depending on the programing language's keywords.
+* Colored code colors the text that we input, depending on the programing language's keywords.
+* You can have a placeholder code, and people can type in code too. You can lock the editing too.
+* Reset code to the default placeholder code.
 * It features 2 elements: the code editor and the console. Both are optional.
 * Optional line count.
 * You can change the theme. Vanilla Css for easier sharing?
 * Live coloring: we can type in the editor box and keywords are recognised and colored on the go.
-* Optional reset to the default placeholder code.
+
 * Tab Size Preference - mobile optimizations?
 
 ### Component structure:
