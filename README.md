@@ -13,6 +13,7 @@ The colored code component is here to enhance the presentation of code on our we
 * You can change the theme. Vanilla Css for easier sharing?
 * Live coloring: we can type in the editor box and keywords are recognised and colored on the go.
 * Optional reset to the default placeholder code.
+* Tab Size Preference - mobile optimizations?
 
 ### Components structure:
     .
