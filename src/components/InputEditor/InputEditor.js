@@ -36,6 +36,7 @@ function InputEditor() {
     var addingBreaks = inputStringToHtml(event.target.value);
     setCodeHtmled(
       <code
+        dangerouslySetInnerHTML={{ __html: addingBreaks }}
         style={{
           width: heightWidth[0],
           height: heightWidth[1],
@@ -49,15 +50,13 @@ function InputEditor() {
           margin: "0",
           padding: "0",
         }}
-      >
-        {addingBreaks}
-      </code>
+      ></code>
     );
   }
 
   function inputStringToHtml(inputString) {
     var match = inputString.replace(/\n/g, "<br />");
-    console.log(match);
+    console.log("match", match);
     return match;
   }
 
