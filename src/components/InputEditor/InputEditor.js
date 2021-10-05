@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./InputEditor.styles.css";
+import parse from "html-react-parser";
 
 function InputEditor() {
   var [inputCode, setInputCode] = useState();
@@ -37,7 +38,6 @@ function InputEditor() {
     console.log(addingBreaks);
     setCodeHtmled(
       <code
-        dangerouslySetInnerHTML={{ __html: addingBreaks }}
         style={{
           width: heightWidth[0],
           height: heightWidth[1],
@@ -47,13 +47,15 @@ function InputEditor() {
           left: "0",
           pointerEvents: "none",
         }}
-      />
+      >
+        {addingBreaks}
+      </code>
     );
   }
 
   function inputStringToHtml(inputString) {
     var replacingLineBreaks = inputString.replace(/\n/g, "<br />");
-    var matches = matchingKeywords(replacingLineBreaks);
+    var matches = parse(matchingKeywords(replacingLineBreaks));
     return matches;
   }
 
