@@ -11,11 +11,22 @@ body {
 code {
   margin: 0;
   padding: 0;
+  font-size: 1em;
+  font-family: "Operator Mono", sans-serif;
 }
 
 textarea {
   margin: 0;
   padding: 0;
+  font-size: 1em;
+  font-family: "Operator Mono", sans-serif;
+}
+
+span {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-family: "Operator Mono", sans-serif;
 }
 
 .input-codeeditor {

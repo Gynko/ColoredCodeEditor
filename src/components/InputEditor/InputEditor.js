@@ -34,6 +34,7 @@ function InputEditor() {
     setInputCode(event.target.value);
     setHeightWidth([ref.current.clientWidth, ref.current.clientHeight]);
     var addingBreaks = inputStringToHtml(event.target.value);
+    console.log(addingBreaks);
     setCodeHtmled(
       <code
         dangerouslySetInnerHTML={{ __html: addingBreaks }}
@@ -42,41 +43,56 @@ function InputEditor() {
           height: heightWidth[1],
           position: "absolute",
           fontFamily: "Operator Mono",
-          color: "#ff7070",
           top: "0",
           left: "0",
           pointerEvents: "none",
-          fontSize: "1em",
-          margin: "0",
-          padding: "0",
         }}
-      ></code>
+      />
     );
   }
 
   function inputStringToHtml(inputString) {
-    var match = inputString.replace(/\n/g, "<br />");
-    console.log("match", match);
-    return match;
+    var replacingLineBreaks = inputString.replace(/\n/g, "<br />");
+    var matches = matchingKeywords(replacingLineBreaks);
+    return matches;
   }
 
-  //var listElements = ["var", "function", "null", "undefined"];
+  var listElements = [
+    "var",
+    "function",
+    "null",
+    "undefined",
+    "for",
+    "let",
+    "const",
+  ];
 
-  /*   function matchingKeywords(text) {
-    var array = [];
+  var htmlElements = ["div", "input"];
+
+  function matchingKeywords(text) {
+    var newText = text;
     if (text !== "") {
       for (let i = 0; i < listElements.length; i++) {
         var concat = `${listElements[i]}`;
         var regex = new RegExp(concat, "g");
-        var result = [...text.matchAll(regex)];
-        if (result.length !== 0) {
-          array.push(result);
-        }
+        newText = newText.replace(
+          regex,
+          `<span style="color:#c78de4">${listElements[i]}</span>`
+        );
       }
-      array = array.flat();
     }
-    return array;
-  } */
+    if (text !== "") {
+      for (let i = 0; i < htmlElements.length; i++) {
+        var concat = `${htmlElements[i]}`;
+        var regex = new RegExp(concat, "g");
+        newText = newText.replace(
+          regex,
+          `<span style="color:#f0654e">${htmlElements[i]}</span>`
+        );
+      }
+    }
+    return newText;
+  }
 
   function resize() {
     setHeightWidth([ref.current.clientWidth, ref.current.clientHeight]);
