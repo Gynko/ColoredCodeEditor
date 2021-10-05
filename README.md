@@ -4,6 +4,10 @@
 
 ![Colored Code Editor](https://i.imgur.com/StINA2X.png)
 
+### State of development:
+
+Colored code is in an early phase of development and therefore not suitable to any production build.
+
 ### Features:
 
 - Colored code colors the text that we input, depending on the keywords.
