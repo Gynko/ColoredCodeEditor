@@ -1,21 +1,23 @@
 # Colored code
-## A vanilla react component to enhance the presentation of code on our websites.
+
+## A react component to enhance the presentation of code on our websites.
 
 ![Colored Code Editor](https://i.imgur.com/StINA2X.png)
 
 ### Features:
-* Colored code colors the text that we input, depending on the keywords.
-* People can change the theme.
-* You can have a placeholder code, and people can type in code too. You can lock the editing too.
-* Reset code to the default placeholder code.
-* It features 2 elements: the code editor and the console. Both are optional.
-* Optional line count.
-* Live coloring: we can type in the editor box and keywords are recognised and colored on the go.
-* Tab Size Preference - mobile optimizations?
+
+- Colored code colors the text that we input, depending on the keywords.
+- People can change the theme.
+- You can have a placeholder code, and people can type in code too.
+- Reset code to the default placeholder code.
+- It features 2 elements: the code editor and the console. Both are optional.
+- Optional line count.
+- Tab Size Preferences - mobile optimizations.
 
 ### Component structure:
+
     .
-    ├── src  
+    ├── src
         ├── ColoredCode
         │   ├───ColoredCode.js
         │   └───ColoredCode.styles.js
@@ -26,3 +28,6 @@
             ├───InputEditor.js
             └───InputEditor.styles.js
 
+### Dependencies:
+
+html-react-parser v1.4.0
