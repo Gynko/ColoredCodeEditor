@@ -24,7 +24,7 @@ span {
 
 .input-codeeditor {
   background-color: rgba(20, 20, 20, 0.397);
-  color: rgba(236, 236, 236, 0.274);
+  color: rgba(236, 236, 236, 0);
   font-family: "Operator Mono", sans-serif;
   border: none;
   font-size: 1em;

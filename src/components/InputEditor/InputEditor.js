@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 import { useState, useEffect, useRef } from "react";
 import "./InputEditor.styles.css";
 import parse from "html-react-parser";
@@ -59,27 +60,19 @@ function InputEditor() {
     return matches;
   }
 
-  var listElements = [
-    "var",
-    "function",
-    "null",
-    "undefined",
-    "for",
-    "let",
-    "const",
-  ];
+  var jsElements = ["var", "for", "let", "const"];
 
   var htmlElements = ["div", "input"];
 
   function matchingKeywords(text) {
     var newText = text;
     if (text !== "") {
-      for (let i = 0; i < listElements.length; i++) {
-        var concat = `${listElements[i]}`;
+      for (let i = 0; i < jsElements.length; i++) {
+        var concat = `${jsElements[i]}`;
         var regex = new RegExp(concat, "g");
         newText = newText.replace(
           regex,
-          `<span style="color:#c78de4">${listElements[i]}</span>`
+          `<span style="color:#c78de4">${jsElements[i]}</span>`
         );
       }
     }
