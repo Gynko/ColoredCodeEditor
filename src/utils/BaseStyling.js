@@ -1,7 +1,7 @@
-//these styles are driving the behavior of the <color> window, which is
-//on top of the textArea window.
+//these styles are driving the look and behaviours of the <color> window, which is
+//superposed to the textArea window.
 //The text displayed in the textArea and the one in code have to be exactly
-//on top of each other. THEREFORE, any changes to font size, font, line heights
+//superposed. THEREFORE, any changes to font size, font, line heights
 //and the like have to match!
 //Paddings, margins of the keywords have to be prohibited, as they would create
 //an unmatch.
