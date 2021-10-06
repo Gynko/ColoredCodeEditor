@@ -5,6 +5,7 @@ import {
   parseString,
 } from "../../utils/MatchingConverting";
 import { baseStylings } from "../../utils/BaseStyling";
+import sanitizeHtml from "sanitize-html";
 
 function InputEditor() {
   var [inputCode, setInputCode] = useState();
@@ -28,6 +29,11 @@ function InputEditor() {
     setInputCode(event.target.value);
     var addingBreaks = convertLineBreaksToBr(event.target.value);
     var parsed = parseString(addingBreaks);
+    console.log(
+      sanitizeHtml(event.target.value, {
+        allowedTags: false,
+      })
+    );
     setStringHtmled(<code style={baseStyleColoredWindow}>{parsed}</code>);
   }
 
