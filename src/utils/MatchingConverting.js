@@ -25,9 +25,10 @@ export function replaceKeywordWithStringedHtml(text, array) {
 
 //Parsing is necessary to display colored keywords.
 //Problem: when typing <, the parser gets mad 👿
+//Ways to escape?
+
 export function parseString(string) {
   var findSynthax = replaceKeywordWithStringedHtml(string, keywords);
-
   var parsed = parse(findSynthax);
   return parsed;
 }
