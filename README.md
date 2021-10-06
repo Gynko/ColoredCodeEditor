@@ -10,10 +10,10 @@ Colored code is in an early phase of development and therefore not suitable to a
 
 ### Features:
 
-- Colored code colors the text that we input, depending on the keywords.
+- Colored code colors the text that we input on the fly, depending on the keywords.
 - People can change the theme.
-- You can have a placeholder code, and people can type in code too.
-- Reset code to the default placeholder code.
+- You can have a placeholder code, and people can type in code too. You can edit lock.
+- People can reset code to the default placeholder code.
 - It features 2 elements: the code editor and the console. Both are optional.
 - Optional line count.
 - Tab Size Preferences - mobile optimizations.
