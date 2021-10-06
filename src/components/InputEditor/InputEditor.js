@@ -6,7 +6,7 @@ import parse from "html-react-parser";
 function InputEditor() {
   var [inputCode, setInputCode] = useState();
   var [heightWidth, setHeightWidth] = useState([0, 0]);
-  var [codeHtmled, setCodeHtmled] = useState(
+  var [stringHtmled, setStringHtmled] = useState(
     <code
       style={{
         width: heightWidth[0],
@@ -35,9 +35,9 @@ function InputEditor() {
   function onInput(event) {
     setInputCode(event.target.value);
     setHeightWidth([ref.current.clientWidth, ref.current.clientHeight]);
-    var addingBreaks = inputStringToHtml(event.target.value);
+    var addingBreaks = lineBreaksConvertToBr(event.target.value);
     console.log(addingBreaks);
-    setCodeHtmled(
+    setStringHtmled(
       <code
         style={{
           width: heightWidth[0],
@@ -54,42 +54,40 @@ function InputEditor() {
     );
   }
 
-  function inputStringToHtml(inputString) {
+  function lineBreaksConvertToBr(inputString) {
     var replacingLineBreaks = inputString.replace(/\n/g, "<br />");
-    var matches = parse(matchingKeywords(replacingLineBreaks));
-    return matches;
+    var matches = matchingAndReplacingKeywords(replacingLineBreaks, elements);
+    var parsed = parse(matches);
+    console.log(matches);
+    return parsed;
   }
 
-  var jsElements = ["var", "for", "let", "const"];
+  var elements = [
+    ["#c78de4", "var", "for", "let", "const"],
+    ["#f0654e", "div", "input"],
+    ["#6eafff", "function"],
+  ];
 
-  var htmlElements = ["div", "input"];
-
-  function matchingKeywords(text) {
+  function matchingAndReplacingKeywords(text, array) {
     var newText = text;
+
     if (text !== "") {
-      for (let i = 0; i < jsElements.length; i++) {
-        var concat = `${jsElements[i]}`;
-        var regex = new RegExp(concat, "g");
-        newText = newText.replace(
-          regex,
-          `<span style="color:#c78de4">${jsElements[i]}</span>`
-        );
-      }
-    }
-    if (text !== "") {
-      for (let i = 0; i < htmlElements.length; i++) {
-        var concat = `${htmlElements[i]}`;
-        var regex = new RegExp(concat, "g");
-        newText = newText.replace(
-          regex,
-          `<span style="color:#f0654e">${htmlElements[i]}</span>`
-        );
+      for (let i = 0; i < array.length; i++) {
+        var subArray = array[i];
+        for (let i = 1; i < subArray.length; i++) {
+          var concat = `${subArray[i]}`;
+          var regex = new RegExp(concat, "g");
+          newText = newText.replace(
+            regex,
+            `<span style="color:${subArray[0]}">${subArray[i]}</span>`
+          );
+        }
       }
     }
     return newText;
   }
 
-  function resize() {
+  function resizeToMatchRef() {
     setHeightWidth([ref.current.clientWidth, ref.current.clientHeight]);
   }
 
@@ -101,10 +99,10 @@ function InputEditor() {
         type="text"
         ref={ref}
         onInput={onInput}
-        onMouseUp={resize}
-        onMouseMove={resize}
+        onMouseUp={resizeToMatchRef}
+        onMouseMove={resizeToMatchRef}
       />
-      {codeHtmled}
+      {stringHtmled}
     </div>
   );
 }
