@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./InputEditor.styles.css";
 import parse from "html-react-parser";
-import { Keywords } from "../../ressources/Keywords";
+import { Keywords } from "../../ressources/ColoredCode/Keywords";
 
 function InputEditor() {
   var [inputCode, setInputCode] = useState();
