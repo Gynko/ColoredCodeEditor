@@ -1,8 +1,9 @@
-/* eslint-disable no-redeclare */
 import { useState, useEffect, useRef } from "react";
 import "./InputEditor.styles.css";
-import parse from "html-react-parser";
-import { Keywords } from "../../ressources/ColoredCode/Keywords";
+import {
+  convertLineBreaksToBr,
+  parseString,
+} from "../../ressources/ColoredCode/MatchingConverting";
 
 function InputEditor() {
   var [inputCode, setInputCode] = useState();
@@ -26,8 +27,6 @@ function InputEditor() {
     <code style={baseStyleColoredWindow}>{inputCode}</code>
   );
 
-  var ref = useRef(null);
-
   useEffect(() => {
     setHeightWidth([ref.current.clientHeight, ref.current.clientWidth]);
   }, []);
@@ -40,34 +39,7 @@ function InputEditor() {
     setStringHtmled(<code style={baseStyleColoredWindow}>{parsed}</code>);
   }
 
-  function convertLineBreaksToBr(inputString) {
-    var replacingLineBreaks = inputString.replace(/\n/g, "<br />");
-    return replacingLineBreaks;
-  }
-
-  function parseString(string) {
-    var findSynthax = replacingKeywordWithStringedHtml(string, Keywords);
-    //Only parse if you find a thing not like <thing>
-    var parsed = parse(findSynthax);
-    return parsed;
-  }
-
-  function replacingKeywordWithStringedHtml(text, arrays) {
-    var newText = text;
-    if (text !== "") {
-      for (let i = 0; i < arrays.length; i++) {
-        var subArray = arrays[i];
-        for (let i = 1; i < subArray.length; i++) {
-          var regex = new RegExp(subArray[i], "g");
-          newText = newText.replace(
-            regex,
-            `<span style="color:${subArray[0]}">${subArray[i]}</span>`
-          );
-        }
-      }
-    }
-    return newText;
-  }
+  var ref = useRef(null);
 
   function resizeToMatchRef() {
     setHeightWidth([ref.current.clientWidth, ref.current.clientHeight]);
