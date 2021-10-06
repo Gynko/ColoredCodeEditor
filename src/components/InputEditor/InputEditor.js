@@ -2,28 +2,28 @@
 import { useState, useEffect, useRef } from "react";
 import "./InputEditor.styles.css";
 import parse from "html-react-parser";
+import { Keywords } from "../../ressources/Keywords";
 
 function InputEditor() {
   var [inputCode, setInputCode] = useState();
   var [heightWidth, setHeightWidth] = useState([0, 0]);
+
+  var baseStyleColoredWindow = {
+    width: heightWidth[0],
+    height: heightWidth[1],
+    position: "absolute",
+    fontFamily: "Operator Mono",
+    top: "0",
+    left: "0",
+    pointerEvents: "none",
+    fontSize: "1em",
+    margin: "0",
+    padding: "0",
+    wordWrap: "break-word",
+  };
+
   var [stringHtmled, setStringHtmled] = useState(
-    <code
-      style={{
-        width: heightWidth[0],
-        height: heightWidth[1],
-        position: "absolute",
-        fontFamily: "Operator Mono",
-        color: "brown",
-        top: "0",
-        left: "0",
-        pointerEvents: "none",
-        fontSize: "1em",
-        margin: "0",
-        padding: "0",
-      }}
-    >
-      {inputCode}
-    </code>
+    <code style={baseStyleColoredWindow}>{inputCode}</code>
   );
 
   var ref = useRef(null);
@@ -35,48 +35,30 @@ function InputEditor() {
   function onInput(event) {
     setInputCode(event.target.value);
     setHeightWidth([ref.current.clientWidth, ref.current.clientHeight]);
-    var addingBreaks = lineBreaksConvertToBr(event.target.value);
-    console.log(addingBreaks);
-    setStringHtmled(
-      <code
-        style={{
-          width: heightWidth[0],
-          height: heightWidth[1],
-          position: "absolute",
-          fontFamily: "Operator Mono",
-          top: "0",
-          left: "0",
-          pointerEvents: "none",
-        }}
-      >
-        {addingBreaks}
-      </code>
-    );
+    var addingBreaks = convertLineBreaksToBr(event.target.value);
+    var parsed = parseString(addingBreaks);
+    setStringHtmled(<code style={baseStyleColoredWindow}>{parsed}</code>);
   }
 
-  function lineBreaksConvertToBr(inputString) {
+  function convertLineBreaksToBr(inputString) {
     var replacingLineBreaks = inputString.replace(/\n/g, "<br />");
-    var matches = matchingAndReplacingKeywords(replacingLineBreaks, elements);
-    var parsed = parse(matches);
-    console.log(matches);
+    return replacingLineBreaks;
+  }
+
+  function parseString(string) {
+    var findSynthax = replacingKeywordWithStringedHtml(string, Keywords);
+    //Only parse if you find a thing not like <thing>
+    var parsed = parse(findSynthax);
     return parsed;
   }
 
-  var elements = [
-    ["#c78de4", "var", "for", "let", "const"],
-    ["#f0654e", "div", "input"],
-    ["#6eafff", "function"],
-  ];
-
-  function matchingAndReplacingKeywords(text, array) {
+  function replacingKeywordWithStringedHtml(text, arrays) {
     var newText = text;
-
     if (text !== "") {
-      for (let i = 0; i < array.length; i++) {
-        var subArray = array[i];
+      for (let i = 0; i < arrays.length; i++) {
+        var subArray = arrays[i];
         for (let i = 1; i < subArray.length; i++) {
-          var concat = `${subArray[i]}`;
-          var regex = new RegExp(concat, "g");
+          var regex = new RegExp(subArray[i], "g");
           newText = newText.replace(
             regex,
             `<span style="color:${subArray[0]}">${subArray[i]}</span>`
