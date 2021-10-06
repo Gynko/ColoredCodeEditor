@@ -3,7 +3,7 @@ import "./InputEditor.styles.css";
 import {
   convertLineBreaksToBr,
   parseString,
-} from "../../ressources/ColoredCode/MatchingConverting";
+} from "../../utils/MatchingConverting";
 
 function InputEditor() {
   var [inputCode, setInputCode] = useState();

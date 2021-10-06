@@ -1,4 +1,4 @@
-import { Keywords } from "./Keywords";
+import { keywords } from "./Keywords";
 import parse from "html-react-parser";
 
 export function convertLineBreaksToBr(string) {
@@ -6,25 +6,25 @@ export function convertLineBreaksToBr(string) {
   return replacingLineBreaks;
 }
 
-export function replaceKeywordWithStringedHtml(text, arrays) {
-  var newText = text;
+export function replaceKeywordWithStringedHtml(text, array) {
+  var stringedHtml = text;
   if (text !== "") {
-    for (let i = 0; i < arrays.length; i++) {
-      var subArray = arrays[i];
+    for (let i = 0; i < array.length; i++) {
+      var subArray = array[i];
       for (let i = 1; i < subArray.length; i++) {
         var regex = new RegExp(subArray[i], "g");
-        newText = newText.replace(
+        stringedHtml = stringedHtml.replace(
           regex,
           `<span style="color:${subArray[0]}">${subArray[i]}</span>`
         );
       }
     }
   }
-  return newText;
+  return stringedHtml;
 }
 
 export function parseString(string) {
-  var findSynthax = replaceKeywordWithStringedHtml(string, Keywords);
+  var findSynthax = replaceKeywordWithStringedHtml(string, keywords);
 
   //Only parse if you find a non closed  "<>" like : "<"
   //If not, the parse function gets really upset.
