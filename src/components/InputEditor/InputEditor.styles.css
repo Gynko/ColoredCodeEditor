@@ -13,6 +13,7 @@ textarea {
   padding: 0;
   font-size: 1em;
   font-family: "Operator Mono", sans-serif;
+  caret-color: white;
 }
 
 span {

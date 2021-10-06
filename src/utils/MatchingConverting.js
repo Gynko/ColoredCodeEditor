@@ -6,6 +6,7 @@ export function convertLineBreaksToBr(string) {
   return replacingLineBreaks;
 }
 
+//Can probably cut this one in 2, even avoid having convertLineBreaksToBr
 export function replaceKeywordWithStringedHtml(text, array) {
   var stringedHtml = text;
   if (text !== "") {
