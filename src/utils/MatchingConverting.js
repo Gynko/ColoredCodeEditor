@@ -7,11 +7,11 @@ export function convertLineBreaksToBr(string) {
 }
 
 //Can probably cut this one in 2, even avoid having convertLineBreaksToBr
-export function replaceKeywordWithStringedHtml(text, array) {
+export function replaceKeywordWithStringedHtml(text) {
   var stringedHtml = text;
   if (text !== "") {
-    for (let i = 0; i < array.length; i++) {
-      var subArray = array[i];
+    for (let i = 0; i < keywords.length; i++) {
+      var subArray = keywords[i];
       for (let i = 1; i < subArray.length; i++) {
         var regex = new RegExp(subArray[i], "g");
         stringedHtml = stringedHtml.replace(
@@ -24,11 +24,8 @@ export function replaceKeywordWithStringedHtml(text, array) {
   return stringedHtml;
 }
 
-//Parsing is necessary to display colored keywords.
-//Problem: when typing <, the parser gets mad 👿
-//Ways to escape?
 export function parseString(string) {
-  var findSynthax = replaceKeywordWithStringedHtml(string, keywords);
-  var parsed = parse(findSynthax);
+  var addingBreaks = convertLineBreaksToBr(string);
+  var parsed = parse(replaceKeywordWithStringedHtml(addingBreaks));
   return parsed;
 }

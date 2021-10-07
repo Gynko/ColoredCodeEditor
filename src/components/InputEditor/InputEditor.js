@@ -1,11 +1,8 @@
+/* eslint-disable eqeqeq */
 import { useState, useEffect, useRef } from "react";
 import "./InputEditor.styles.css";
-import {
-  convertLineBreaksToBr,
-  parseString,
-} from "../../utils/MatchingConverting";
-import { baseStylings } from "../../utils/BaseStyling";
-import sanitizeHtml from "sanitize-html";
+import { parseString } from "../../utils/MatchingConverting";
+import { baseStylingsCode, baseStylingsPre } from "../../utils/BaseStyling";
 
 function InputEditor() {
   var [inputCode, setInputCode] = useState();
@@ -15,7 +12,7 @@ function InputEditor() {
     width: widthHeight[0],
     height: widthHeight[1],
   };
-  var baseStyleColoredWindow = { ...drivenStyles, ...baseStylings };
+  var baseStyleColoredWindow = { ...drivenStyles, ...baseStylingsCode };
 
   var [stringHtmled, setStringHtmled] = useState(
     <code style={baseStyleColoredWindow}>{inputCode}</code>
@@ -27,20 +24,30 @@ function InputEditor() {
 
   function onInput(event) {
     setInputCode(event.target.value);
-    var addingBreaks = convertLineBreaksToBr(event.target.value);
-    var parsed = parseString(addingBreaks);
-    console.log(
-      sanitizeHtml(event.target.value, {
-        allowedTags: false,
-      })
-    );
+    var parsed = parseString(event.target.value);
     setStringHtmled(<code style={baseStyleColoredWindow}>{parsed}</code>);
+    console.log(inputCode);
   }
 
   var ref = useRef(null);
 
   function resizeToMatchRef() {
     setwidthHeight([ref.current.clientWidth, ref.current.clientHeight]);
+  }
+
+  function addTab(event) {
+    // keyCode 9 is Tab Key
+    if (event.keyCode == 9) {
+      event.preventDefault();
+      //Need to figure out where the caret is
+      var val = ref.current.value;
+      var start = ref.current.selectionStart;
+      var end = ref.current.selectionEnd;
+      ref.current.value = val.substring(0, start) + "\t" + val.substring(end);
+      ref.current.selectionStart = ref.current.selectionEnd = start + 1;
+      var parsed = parseString(event.target.value);
+      setStringHtmled(<code style={baseStyleColoredWindow}>{parsed}</code>);
+    }
   }
 
   return (
@@ -53,8 +60,9 @@ function InputEditor() {
         onInput={onInput}
         onMouseUp={resizeToMatchRef}
         onMouseMove={resizeToMatchRef}
+        onKeyDown={addTab}
       />
-      {stringHtmled}
+      <pre style={baseStylingsPre}>{stringHtmled}</pre>
     </div>
   );
 }

@@ -6,7 +6,7 @@
 //Paddings, margins of the keywords have to be prohibited, as they would create
 //an unmatch.
 
-export var baseStylings = {
+export var baseStylingsCode = {
   position: "absolute",
   fontFamily: "Operator Mono",
   top: "0",
@@ -14,6 +14,18 @@ export var baseStylings = {
   pointerEvents: "none",
   margin: "0",
   padding: "0",
-  wordWrap: "break-word",
   fontSize: "1em",
+  whiteSpace: "inherit",
+  wordWrap: "inherit",
+};
+
+export var baseStylingsPre = {
+  position: "absolute",
+  top: "0",
+  left: "0",
+  pointerEvents: "none",
+  margin: "0",
+  padding: "0",
+  whiteSpace: "pre-wrap",
+  wordWrap: "normal",
 };
