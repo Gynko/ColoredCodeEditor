@@ -26,7 +26,6 @@ function InputEditor() {
     setInputCode(event.target.value);
     var parsed = parseString(event.target.value);
     setStringHtmled(<code style={baseStyleColoredWindow}>{parsed}</code>);
-    console.log(inputCode);
   }
 
   var ref = useRef(null);
@@ -36,16 +35,17 @@ function InputEditor() {
   }
 
   function addTab(event) {
-    // keyCode 9 is Tab Key
     if (event.keyCode == 9) {
       event.preventDefault();
-      //Need to figure out where the caret is
+      //Finding the caret
       var val = ref.current.value;
       var start = ref.current.selectionStart;
       var end = ref.current.selectionEnd;
-      ref.current.value = val.substring(0, start) + "\t" + val.substring(end);
-      ref.current.selectionStart = ref.current.selectionEnd = start + 1;
-      var parsed = parseString(event.target.value);
+      // Set textarea value to: text before caret + tab + text after caret
+      ref.current.value = val.substring(0, start) + "   " + val.substring(end);
+      // put caret at right position again
+      ref.current.selectionStart = ref.current.selectionEnd = start + 3;
+      var parsed = parseString(ref.current.value);
       setStringHtmled(<code style={baseStyleColoredWindow}>{parsed}</code>);
     }
   }
