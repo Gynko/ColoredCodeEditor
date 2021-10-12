@@ -7,16 +7,15 @@ import { baseStylingsCode, baseStylingsPre } from "../../utils/BaseStyling";
 function InputEditor() {
   var [inputCode, setInputCode] = useState();
   var [widthHeight, setwidthHeight] = useState([0, 0]);
-
   var drivenStyles = {
     width: widthHeight[0],
     height: widthHeight[1],
   };
   var baseStyleColoredWindow = { ...drivenStyles, ...baseStylingsCode };
-
   var [stringHtmled, setStringHtmled] = useState(
     <code style={baseStyleColoredWindow}>{inputCode}</code>
   );
+  var ref = useRef(null);
 
   useEffect(() => {
     setwidthHeight([ref.current.clientWidth, ref.current.clientHeight]);
@@ -28,8 +27,6 @@ function InputEditor() {
     setStringHtmled(<code style={baseStyleColoredWindow}>{parsed}</code>);
   }
 
-  var ref = useRef(null);
-
   function resizeToMatchRef() {
     setwidthHeight([ref.current.clientWidth, ref.current.clientHeight]);
   }
@@ -37,7 +34,7 @@ function InputEditor() {
   function addTab(event) {
     if (event.keyCode == 9) {
       event.preventDefault();
-      //Finding the caret
+      //Locating the caret
       var val = ref.current.value;
       var start = ref.current.selectionStart;
       var end = ref.current.selectionEnd;

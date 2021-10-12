@@ -1,23 +1,22 @@
+/* eslint-disable eqeqeq */
 import { keywords } from "./Keywords";
 import parse from "html-react-parser";
 
-export function convertLineBreaksToBr(string) {
-  var replacingLineBreaks = string.replace(/\n/g, "<br />");
-  return replacingLineBreaks;
-}
-
-//Can probably cut this one in 2, even avoid having convertLineBreaksToBr
-export function replaceKeywordWithStringedHtml(text) {
+function replaceKeywordsWithStringedHtml(text) {
   var stringedHtml = text;
   if (text !== "") {
     for (let i = 0; i < keywords.length; i++) {
       var subArray = keywords[i];
-      for (let i = 1; i < subArray.length; i++) {
-        var regex = new RegExp(subArray[i], "g");
-        stringedHtml = stringedHtml.replace(
-          regex,
-          `<span style="color:${subArray[0]}">${subArray[i]}</span>`
-        );
+      for (let i = 2; i < subArray.length; i++) {
+        if (subArray[1] == "keywords") {
+          var regex = new RegExp(subArray[i], "g");
+          stringedHtml = stringedHtml.replace(
+            regex,
+            `<span style="color:${subArray[0]}">${subArray[i]}</span>`
+          );
+        } else if (subArray[1] == "linebreak") {
+          stringedHtml.replace(/\n/g, "<br />");
+        }
       }
     }
   }
@@ -25,7 +24,6 @@ export function replaceKeywordWithStringedHtml(text) {
 }
 
 export function parseString(string) {
-  var addingBreaks = convertLineBreaksToBr(string);
-  var parsed = parse(replaceKeywordWithStringedHtml(addingBreaks));
+  var parsed = parse(replaceKeywordsWithStringedHtml(string));
   return parsed;
 }
